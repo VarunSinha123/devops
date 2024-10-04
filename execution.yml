@@ -3,23 +3,31 @@ pipeline:
   stages:
     - stage: "Checkout Code"
       steps:
-        - checkout:
-            branch: "main"
-            repo: "https://github.com/username/repository.git"
-            credentialsId: "github-credentials"
+        - script:
+            # Jenkins' built-in checkout step doesn't use this syntax in declarative pipeline.
+            # You can call the git step like this:
+            git:
+              branch: "main"
+              url: "https://github.com/username/repository.git"
+              credentialsId: "github-credentials"
 
     - stage: "Build"
       steps:
-        - echo: "Building the project"
+        - script:
+            echo: "Building the project"
 
     - stage: "Test"
       steps:
-        - echo: "Running tests"
+        - script:
+            echo: "Running tests"
 
     - stage: "Deploy"
       steps:
-        - echo: "Deploying the project"
+        - script:
+            echo: "Deploying the project"
 
   post:
     always:
-      - echo: "Job completed"
+      - script:
+          echo: "Job completed"
+
