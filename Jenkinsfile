@@ -12,21 +12,21 @@ pipeline {
             steps {
                 // Example: Placeholder for the build process
                 // Replace this with actual build commands for your project
-                sh 'echo "Building the project..."'
+                bat 'echo "Building the project..."'
             }
         }
         stage('Test') {
             steps {
                 // Example: Placeholder for running tests
                 // Replace with actual test commands
-                sh 'echo "Running tests..."'
+                bat 'echo "Running tests..."'
             }
         }
         stage('Deploy') {
             steps {
                 // Example: Placeholder for deployment process
                 // Replace with your deployment steps
-                sh 'echo "Deploying the application..."'
+                bat 'echo "Deploying the application..."'
             }
         }
     }
