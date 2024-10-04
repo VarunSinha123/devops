@@ -1,0 +1,59 @@
+node {
+    // Define the workspace and repository URL
+    def repoUrl = 'https://github.com/VarunSinha123/devops.git'
+
+    // 1. Checkout code from GitHub
+    stage('Checkout') {
+        echo 'Checking out the code...'
+        checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']],
+                      userRemoteConfigs: [[url: repoUrl]]]
+    }
+
+    // 2. Build stage
+    stage('Build') {
+        try {
+            echo 'Building the code...'
+            if (isUnix()) {
+                sh 'echo "Unix build command goes here"'
+            } else {
+                bat 'echo Windows build command goes here'
+            }
+        } catch (err) {
+            error "Build failed: ${err}"
+        }
+    }
+
+    // 3. Test stage
+    stage('Test') {
+        try {
+            echo 'Running tests...'
+            if (isUnix()) {
+                sh 'echo "Unix test command goes here"'
+            } else {
+                bat 'echo Windows test command goes here'
+            }
+        } catch (err) {
+            error "Tests failed: ${err}"
+        }
+    }
+
+    // 4. Deploy stage
+    stage('Deploy') {
+        try {
+            echo 'Deploying the application...'
+            if (isUnix()) {
+                sh 'echo "Unix deploy command goes here"'
+            } else {
+                bat 'echo Windows deploy command goes here'
+            }
+        } catch (err) {
+            error "Deployment failed: ${err}"
+        }
+    }
+
+    // Post-build actions
+    stage('Post Actions') {
+        echo 'Cleaning up...'
+        cleanWs()  // Clean the workspace
+    }
+}
